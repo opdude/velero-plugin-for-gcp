@@ -210,6 +210,7 @@ func (b *VolumeSnapshotter) CreateVolumeFromSnapshot(snapshotID, volumeType, vol
 		SourceSnapshot: res.SelfLink,
 		Type:           volumeType,
 		Description:    res.Description,
+		Labels:         res.Labels,
 	}
 
 	if isMultiZone(volumeAZ) {
@@ -318,6 +319,7 @@ func (b *VolumeSnapshotter) createSnapshot(snapshotName, volumeID, volumeAZ stri
 		Description:  getSnapshotTags(tags, disk.Description, b.log),
 		SourceDisk:   disk.SelfLink,
 		SnapshotType: b.snapshotType,
+		Labels:       disk.Labels,
 	}
 
 	if b.snapshotLocation != "" {
@@ -343,6 +345,7 @@ func (b *VolumeSnapshotter) createRegionSnapshot(snapshotName, volumeID, volumeR
 		Description:  getSnapshotTags(tags, disk.Description, b.log),
 		SourceDisk:   disk.SelfLink,
 		SnapshotType: b.snapshotType,
+		Labels:       disk.Labels,
 	}
 
 	if b.snapshotLocation != "" {
